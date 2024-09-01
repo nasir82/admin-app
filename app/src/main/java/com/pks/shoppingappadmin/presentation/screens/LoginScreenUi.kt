@@ -39,6 +39,7 @@ import com.pks.shoppingappadmin.components.DividerWithText
 import com.pks.shoppingappadmin.components.LoginWithSocialMedia
 import com.pks.shoppingappadmin.components.ShoppingButton
 import com.pks.shoppingappadmin.components.ShoppingTextField
+import com.pks.shoppingappadmin.presentation.navigation.App
 import com.pks.shoppingappadmin.presentation.navigation.SignUp
 import com.pks.shoppingappadmin.presentation.viewmodels.ShoppingAppViewModel
 
@@ -71,6 +72,7 @@ fun LoginScreenUi(modifier: Modifier = Modifier,viewModel: ShoppingAppViewModel=
     }else if (loginState.value.userData!=null){
         //viewModel.getUserByUid(firebaseAuth.currentUser!!.uid)
        // AppNav(firebaseAuth = firebaseAuth)
+        App(firebaseAuth = firebaseAuth)
     }else {
 
         var icon = if (isShow.value) Icons.Default.VisibilityOff else Icons.Default.Visibility
@@ -132,7 +134,7 @@ fun LoginScreenUi(modifier: Modifier = Modifier,viewModel: ShoppingAppViewModel=
                            Log.d("error","not login")
                        }else{
 
-                           //viewModel.signIn(email = email.value,password=password.value)
+                           viewModel.signIn(email = email.value,password=password.value)
                        }
 
                 }

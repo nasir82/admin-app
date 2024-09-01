@@ -23,3 +23,8 @@ object MainHome
 @Serializable
 object MainApp
 
+@Serializable
+object AddCategory
+@Serializable
+object OrderDetails
+

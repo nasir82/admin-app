@@ -10,8 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.pks.shoppingappadmin.presentation.screens.AddCategoryScreenUi
+import com.pks.shoppingappadmin.presentation.screens.AddProductsScreenUi
 import com.pks.shoppingappadmin.presentation.screens.LoginScreenUi
-import com.pks.shoppingappadmin.presentation.screens.MainApp
+import com.pks.shoppingappadmin.presentation.screens.OrderDetailsScreenUI
 import com.pks.shoppingappadmin.presentation.screens.SignUpScreenUI
 
 @Composable
@@ -34,22 +36,31 @@ fun App(modifier: Modifier = Modifier,firebaseAuth: FirebaseAuth) {
                 composable<Login> {
                     LoginScreenUi(nav = navHostController, firebaseAuth =firebaseAuth )
                 }
-                composable<SignUp> {  }
+                composable<SignUp> {
+                    SignUpScreenUI(nav = navHostController, auth = firebaseAuth)
+                }
             }
             navigation<MainHome>(
                 startDestination = MainApp
             ){
                 composable<DashBoard> {  }
-                composable<AddProducts> {  }
+                composable<AddProducts> {
+                    AddProductsScreenUi()
+                }
+                 composable<AddCategory> {
+                    AddCategoryScreenUi()
+                }
+
                 composable<Order> {  }
                 composable<Notificaion> {  }
                 composable<Category> {  }
-                composable<SignUp> { 
-                    SignUpScreenUI(nav = navHostController)
+                composable<OrderDetails> {
+                    OrderDetailsScreenUI()
                 }
+
                 
                 composable<MainApp> {
-                    com.pks.shoppingappadmin.presentation.screens.MainApp()
+                    com.pks.shoppingappadmin.presentation.screens.MainApp(navHostController = navHostController, auth = firebaseAuth)
                 }
             }
 

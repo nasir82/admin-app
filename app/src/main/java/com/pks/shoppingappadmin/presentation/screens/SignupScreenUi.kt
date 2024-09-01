@@ -38,12 +38,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 import com.pks.shoppingappadmin.R
 import com.pks.shoppingappadmin.components.DividerWithText
 import com.pks.shoppingappadmin.components.LoginWithSocialMedia
 import com.pks.shoppingappadmin.components.ShoppingButton
 import com.pks.shoppingappadmin.components.ShoppingTextField
 import com.pks.shoppingappadmin.domain.model.UserData
+import com.pks.shoppingappadmin.presentation.navigation.App
 import com.pks.shoppingappadmin.presentation.navigation.Login
 import com.pks.shoppingappadmin.presentation.viewmodels.ShoppingAppViewModel
 import kotlinx.coroutines.launch
@@ -53,7 +55,8 @@ import kotlinx.coroutines.launch
 fun SignUpScreenUI(
     modifier: Modifier = Modifier,
     viewModel: ShoppingAppViewModel = hiltViewModel(),
-    nav: NavController
+    nav: NavController,
+    auth: FirebaseAuth
 ) {
     val x = LocalConfiguration.current.screenWidthDp - 150
     val y = LocalConfiguration.current.screenHeightDp - 80
@@ -91,6 +94,7 @@ fun SignUpScreenUI(
         }
     } else if (state.value.userData != null) {
        // SuccessScreen(navDestinations = nav)
+        App(firebaseAuth = auth)
     } else {
 
         var icon = if (isShow.value) Icons.Default.VisibilityOff else Icons.Default.Visibility

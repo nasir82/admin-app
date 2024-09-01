@@ -35,12 +35,15 @@ fun CategoryCart(modifier: Modifier = Modifier,index:Int=0) {
         .fillMaxWidth()
         .padding(paddingValues)
         .height(280.dp), shape = RoundedCornerShape(15.dp), colors = CardDefaults.cardColors(
-            containerColor = Color.Transparent,
+            containerColor = Color(0xFFFFFFFF),
             disabledContainerColor = Color.Transparent
-        )){
+        ),
+        elevation = CardDefaults.elevatedCardElevation(1.dp)){
         Column(modifier = Modifier.fillMaxSize()) {
-            Image(painterResource(id = R.drawable.passion ), contentDescription = "", modifier = Modifier.weight(1f).clip(shape = RoundedCornerShape(10.dp)), contentScale = ContentScale.Crop)
-            Text(text = "Name of product category")
+            Image(painterResource(id = R.drawable.passion ), contentDescription = "", modifier = Modifier
+                .weight(1f)
+                .clip(shape = RoundedCornerShape(10.dp)), contentScale = ContentScale.Crop)
+            Text(text = "Name of product category", modifier = Modifier.padding(horizontal = 8.dp))
         }
 
     }
@@ -55,7 +58,9 @@ fun AllProductCart(modifier: Modifier = Modifier) {
             disabledContainerColor = Color.Transparent
         ),
         elevation = CardDefaults.elevatedCardElevation(5.dp)){
-        Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)) {
             Image(painterResource(id = R.drawable.passion ), contentDescription = "", modifier = Modifier.weight(1f), contentScale = ContentScale.Crop)
             Text(text = "Name of product category")
             Text(text = "Name of product category")
