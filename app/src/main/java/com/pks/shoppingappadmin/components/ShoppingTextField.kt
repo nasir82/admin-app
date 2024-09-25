@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,11 +37,14 @@ fun ShoppingTextField(
     leadingIcon: ImageVector? = null,
     trailingIcon: ImageVector? = null,
     value: String,
+    isError:Boolean = false,
     isEnable:Boolean = true,
     readOnly:Boolean = false,
+    maxLine:Int = 1,
     onLeadingClick: () -> Unit = {},
     onTrailingClick: () -> Unit = {},
     visualTransformation: Boolean = false,
+    keyboardType: KeyboardType = KeyboardType.Text,
     onValueChange: (String) -> Unit
 ) {
 
@@ -54,6 +58,7 @@ fun ShoppingTextField(
             .fillMaxWidth(),
         shape = RoundedCornerShape(15.dp),
         enabled = isEnable,
+
         trailingIcon =trailingIcon?.let {
             {
                 Icon(
@@ -63,6 +68,8 @@ fun ShoppingTextField(
                 )
             }
         },
+        maxLines = maxLine,
+        isError = isError,
         readOnly = readOnly,
         leadingIcon = leadingIcon?.let {
             {
@@ -75,6 +82,7 @@ fun ShoppingTextField(
         },
 
         keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
             imeAction = ImeAction.Done
         ),
         colors = TextFieldDefaults.colors(
@@ -82,10 +90,11 @@ fun ShoppingTextField(
             disabledTextColor = Color.Black,
             disabledContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
-            focusedContainerColor = Color.Transparent
-
+            focusedContainerColor = Color.Transparent,
+            errorContainerColor = Color.Transparent
 
         ),
+
         visualTransformation = if (visualTransformation) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardActions = KeyboardActions(
             onDone = {

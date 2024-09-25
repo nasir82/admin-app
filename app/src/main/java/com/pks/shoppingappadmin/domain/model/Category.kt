@@ -1,16 +1,16 @@
 package com.pks.shoppingappadmin.domain.model
 
-import java.time.LocalDateTime
-
 data class CategoryModel(
-    var name:String="",
-    var date: String = LocalDateTime.now().toString(),
-    var createdBy:String = "Nasir"
+    var image:String = "",
+    var name:String = "",
+    var parentId:String = "",
+    var isFeatured:Boolean = false,
 )
 
 data class UserData(
     var name:String?="",
     var email:String?="",
+    var address:String?="",
     var password:String?="",
     var phone:String?=""
 )

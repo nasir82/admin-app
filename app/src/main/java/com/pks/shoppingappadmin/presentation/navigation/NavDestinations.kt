@@ -1,5 +1,6 @@
 package com.pks.shoppingappadmin.presentation.navigation
 
+import com.pks.shoppingappadmin.orders.domain.model.OrderModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -26,5 +27,8 @@ object MainApp
 @Serializable
 object AddCategory
 @Serializable
-object OrderDetails
+data class OrderDetails( val order:OrderModel)
+
+@Serializable
+data class AllProducts(val category:String)
 

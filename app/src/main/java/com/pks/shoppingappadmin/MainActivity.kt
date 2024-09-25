@@ -4,16 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.pks.shoppingappadmin.category.presentation.AddCategoryViewModel
 import com.pks.shoppingappadmin.presentation.navigation.App
-import com.pks.shoppingappadmin.presentation.screens.CategoryScreen
+import com.pks.shoppingappadmin.showcategory.presentation.CategoryViewModel
 import com.pks.shoppingappadmin.ui.theme.ShoppingAppAdminTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,12 +21,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val vmd:AddCategoryViewModel = hiltViewModel()
+            val vm:CategoryViewModel = hiltViewModel()
             ShoppingAppAdminTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                 //App(modifier = Modifier.padding(innerPadding))
-//                    CategoryScreen()
-//                }
-                App(firebaseAuth = firebaseAuth)
+                App(firebaseAuth = firebaseAuth,categoryViewModel = vm, addCategoryViewModel = vmd)
             }
         }
     }

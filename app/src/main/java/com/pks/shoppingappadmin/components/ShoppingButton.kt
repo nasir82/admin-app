@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 fun ShoppingButton(
     modifier: Modifier = Modifier.fillMaxWidth().height(56.dp),
     text: String,
+    enable:Boolean=true,
     isShowBorder: Boolean = true,
     border: BorderStroke = BorderStroke(width = 1.dp, color = Color.LightGray),
     containerColor: Color = Color.White,
@@ -41,6 +42,7 @@ fun ShoppingButton(
             onClick.invoke()
         },
         shape = RoundedCornerShape(10.dp),
+        enabled = enable,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
