@@ -2,7 +2,7 @@ package com.pks.shoppingappadmin.category.domain.repo
 
 import com.pks.shoppingappadmin.category.presentation.show_category.CategoryState
 import com.pks.shoppingappadmin.common.ResultState
-import com.pks.shoppingappadmin.domain.model.CategoryModel
+import com.pks.shoppingappadmin.category.domain.model.CategoryModel
 import kotlinx.coroutines.flow.Flow
 
 interface AddCategoryRepo {

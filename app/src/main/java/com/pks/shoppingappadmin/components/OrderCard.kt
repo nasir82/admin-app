@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +44,7 @@ fun OrderCard(
                 onClick.invoke()
             },
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFFFFF),
+            containerColor = MaterialTheme.colorScheme.surface,
             disabledContainerColor = Color(0xFFFFFFFF)
         )
     ) {
@@ -58,7 +59,7 @@ fun OrderCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Start
             ) {
-                Text(text = "Order ID: ")
+                Text(text = "Order ID: ", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = order.id ?: "__",
@@ -69,24 +70,24 @@ fun OrderCard(
             Row {
                 Text(text = "Order Status: ")
                 Spacer(modifier = Modifier.width(5.dp))
-                Text(text = orderStatus, modifier = Modifier.weight(1f))
+                Text(text = orderStatus, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
             }
             Row {
                 Text(text = "Delivery Location: ")
                 Spacer(modifier = Modifier.width(5.dp))
-                Text(text = order.location ?: "__", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text(text = order.location ?: "__", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.weight(1f))
             }
             Row {
                 Text(text = "Approximate Del.: ")
                 Spacer(modifier = Modifier.width(5.dp))
-                Text(text = order.approximateDelivery ?: "__", modifier = Modifier.weight(1f))
+                Text(text = order.approximateDelivery ?: "__", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground, modifier = Modifier.weight(1f))
             }
             if(!order.deliveredBy.isNullOrEmpty()){
                 Row {
                     Text(text = "Delivered By: ")
                     Spacer(modifier = Modifier.width(5.dp))
 
-                        Text(text = order.deliveredBy)
+                        Text(text = order.deliveredBy, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
                 }
             }
         }

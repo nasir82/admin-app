@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -28,7 +29,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,7 +53,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AddCategoryScreenUi(
-    modifier: Modifier = Modifier,
     viewModel: AddCategoryViewModel,
     navController:NavHostController
 ) {
@@ -77,8 +76,6 @@ fun AddCategoryScreenUi(
     val code = remember {
         mutableIntStateOf(0)
     }
-
-    val coroutineScope = rememberCoroutineScope()
     val snackBarState = remember {
         SnackbarHostState()
     }
@@ -97,7 +94,8 @@ fun AddCategoryScreenUi(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .background(color = MaterialTheme.colorScheme.background)
+                .padding(top =  innerPadding.calculateTopPadding() - 10.dp, bottom = innerPadding.calculateBottomPadding())
         ) {
 
 
@@ -121,9 +119,7 @@ fun AddCategoryScreenUi(
                     checkingFrom(snackBarState,viewModel)
                 }
 
-                if (state.success!!.isNotEmpty()) {
-
-                    Log.d("calling upload", "thi checking")
+                if (state.success.isNotEmpty()) {
                     message.value = "Added the new category"
                     code.value = 2
                     // here i need to call snackbar how can i do this
@@ -200,9 +196,9 @@ fun AddCategoryScreenUi(
                         .fillMaxWidth()
                         .padding(end = 8.dp), horizontalArrangement = Arrangement.End
                 ) {
-                    ShoppingButton(text = "Cancel", modifier = Modifier.wrapContentWidth()) {
-                        navController.popBackStack()
-                    }
+//                    ShoppingButton(text = "Cancel", modifier = Modifier.wrapContentWidth()) {
+//                        navController.popBackStack()
+//                    }
                     Spacer(modifier = Modifier.width(20.dp))
                     ShoppingButton(
                         text = "Add",

@@ -11,9 +11,8 @@ import com.pks.shoppingappadmin.category.domain.use_case.AddCategoryUseCase
 import com.pks.shoppingappadmin.category.domain.use_case.GetCategoryUseCases
 import com.pks.shoppingappadmin.category.presentation.show_category.CategoryState
 import com.pks.shoppingappadmin.common.ResultState
-import com.pks.shoppingappadmin.domain.model.CategoryModel
+import com.pks.shoppingappadmin.category.domain.model.CategoryModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -84,7 +83,6 @@ class AddCategoryViewModel @Inject constructor(private val addCategoryUseCase: A
         _categoryState2.value = CategoryState(isLoading = true)
         Log.d("inside category collector", "collectng category viewmodel")
         viewModelScope.launch {
-            delay(10000)
             getCategoryUseCases.getCategories().collectLatest {
                 when (it) {
                     is ResultState.Error -> {

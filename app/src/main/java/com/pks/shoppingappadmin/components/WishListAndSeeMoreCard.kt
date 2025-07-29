@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,17 +21,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.pks.shoppingappadmin.domain.model.ProductModel
+import com.pks.shoppingappadmin.products.domain.model.ProductModel
 
 
 @Composable
-fun WishListAndSeeMoreCard(modifier: Modifier = Modifier,product:ProductModel,onClick:()->Unit={}) {
+fun WishListAndSeeMoreCard(modifier: Modifier = Modifier, product: ProductModel, onClick:()->Unit={}) {
     Box(modifier = Modifier.fillMaxWidth().height(125.dp)){
 
 
@@ -49,24 +47,24 @@ fun WishListAndSeeMoreCard(modifier: Modifier = Modifier,product:ProductModel,on
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                 Column(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Top
                 ) {
                     Text(
                         text = product.title,
                         maxLines = 2,
-                        lineHeight = TextUnit(value = 14f, type = TextUnitType.Sp),
+                       style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
-                        fontSize = 12.sp
+                        color = MaterialTheme.colorScheme.onBackground
                     )
-                    Text(text = product.categoryId)
-                    Text(text = product.productType)
-                    Text(text = "Blue")
+                    Text(text = product.categoryId,color = MaterialTheme.colorScheme.onBackground, style = MaterialTheme.typography.labelMedium)
+                    Text(text = product.productType,color = MaterialTheme.colorScheme.onBackground, style = MaterialTheme.typography.labelMedium)
+                    Text(text = "Blue",color = MaterialTheme.colorScheme.onBackground, style = MaterialTheme.typography.labelMedium)
 
                 }
             }
 
             Row(modifier = Modifier.width(80.dp), horizontalArrangement = Arrangement.End) {
-                Text(text =product.price.toString())
+                Text(text =product.price.toString(), style = MaterialTheme.typography.titleMedium,color = MaterialTheme.colorScheme.onBackground)
             }
             Spacer(modifier = Modifier.width(5.dp))
 

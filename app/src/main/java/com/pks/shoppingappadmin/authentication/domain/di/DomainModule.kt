@@ -19,4 +19,9 @@ object DomainModule {
       return ShoppingAppRepoImp(db,auth);
   }
 
+    @Provides
+    fun providesFirebaseAuth():FirebaseAuth{
+        return  FirebaseAuth.getInstance()
+    }
+
 }

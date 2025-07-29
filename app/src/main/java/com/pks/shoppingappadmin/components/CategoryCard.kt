@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,28 +25,22 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.pks.shoppingappadmin.R
-import com.pks.shoppingappadmin.domain.model.CategoryModel
+import com.pks.shoppingappadmin.category.domain.model.CategoryModel
 
 
 @Composable
 fun CategoryCart(modifier: Modifier = Modifier, item: CategoryModel, onClick: () -> Unit = {}) {
-
-//    val paddingValues = if(index%2==0){
-//        PaddingValues(end = 5.dp)
-//    }else{
-//        PaddingValues(start = 5.dp)
-//    }
     Card(modifier = modifier
         .fillMaxWidth()
         //.background(color = Color(0xFFBDBDBD), shape = RoundedCornerShape(12.dp))
         .clickable {
             onClick.invoke()
         }
-        .height(260.dp), shape = RoundedCornerShape(10.dp), colors = CardDefaults.cardColors(
-        containerColor = Color(0xFFCECECE),
+        .height(250.dp), shape = RoundedCornerShape(10.dp), colors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surface,
         disabledContainerColor = Color.Transparent
     ),
-        elevation = CardDefaults.elevatedCardElevation(1.dp)) {
+        elevation = CardDefaults.elevatedCardElevation(2.dp)) {
         Column(modifier = Modifier.fillMaxSize()) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -57,8 +52,8 @@ fun CategoryCart(modifier: Modifier = Modifier, item: CategoryModel, onClick: ()
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = item.name, modifier = Modifier.padding(horizontal = 8.dp))
-            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = item.name, modifier = Modifier.padding(horizontal = 8.dp), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+            Spacer(modifier = Modifier.height(4.dp))
         }
 
     }

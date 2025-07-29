@@ -8,9 +8,9 @@ import com.pks.shoppingappadmin.authentication.domain.usecase.CreateUserUseCase
 import com.pks.shoppingappadmin.authentication.domain.usecase.GetUserUseCase
 import com.pks.shoppingappadmin.authentication.domain.usecase.UpdateUserDataUsecase
 import com.pks.shoppingappadmin.authentication.presentation.profile.ProfileScreenState
+import com.pks.shoppingappadmin.authentication.presentation.signup.SignupScreenState
 import com.pks.shoppingappadmin.common.ResultState
-import com.pks.shoppingappadmin.domain.model.UserData
-import com.pks.shoppingappadmin.presentation.viewmodels.SignupScreenState
+import com.pks.shoppingappadmin.category.domain.model.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

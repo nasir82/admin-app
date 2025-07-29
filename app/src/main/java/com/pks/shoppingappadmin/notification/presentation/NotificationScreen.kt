@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,11 +24,12 @@ fun NotificationScreenUi(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Top
         ) {
-            Spacer(modifier = Modifier.height(45.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Text(
                 text = "Notifications", style = TextStyle(
-                    fontWeight = FontWeight.SemiBold, fontSize = 24.sp
-                )
+                    fontWeight = FontWeight.SemiBold, fontSize = 20.sp
+                ),
+                modifier = Modifier.padding(horizontal = 8.dp)
             )
         }
     }

@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -40,12 +41,12 @@ import androidx.navigation.NavHostController
 import com.google.firebase.auth.FirebaseAuth
 import com.pks.shoppingappadmin.R
 import com.pks.shoppingappadmin.authentication.presentation.AuthenticationViewModel
+import com.pks.shoppingappadmin.category.domain.model.UserData
 import com.pks.shoppingappadmin.components.ShoppingButton
 import com.pks.shoppingappadmin.components.ShoppingTextField2
 import com.pks.shoppingappadmin.core.presentation.utils.shimmerEffect
-import com.pks.shoppingappadmin.domain.model.UserData
+import com.pks.shoppingappadmin.navigation.Login
 import com.pks.shoppingappadmin.orders.presentation.CustomAlertDialogue
-import com.pks.shoppingappadmin.presentation.navigation.Login
 
 
 @Composable
@@ -102,12 +103,12 @@ fun ProfileScreeUI(
         }
         val btnText = if (isEnable.value) "Save" else "Edit Profile"
         val focusManager = LocalFocusManager.current
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)) {
             Box(
                 modifier = Modifier
 
                     .offset(x = (x).dp, y = (-200).dp)
-                    .background(color = Color(0xFFF68B8B), shape = CircleShape)
+                    .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
                     .size(size = 350.dp)
                     .clip(
                         shape = CircleShape
@@ -117,7 +118,7 @@ fun ProfileScreeUI(
                 modifier = Modifier
 
                     .offset(x = (-160).dp, y = (y).dp)
-                    .background(color = Color(0xFFF68B8B), shape = CircleShape)
+                    .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
                     .size(size = 250.dp)
                     .clip(
                         shape = CircleShape
@@ -127,6 +128,7 @@ fun ProfileScreeUI(
             Column(
                 Modifier
                     .fillMaxSize()
+                    .background(color = Color.Transparent)
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
@@ -217,7 +219,7 @@ fun ProfileScreeUI(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                ShoppingButton(text = "Logout", containerColor = Color(0xFFF68B8B)) {
+                ShoppingButton(text = "Logout", containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onBackground) {
                     // nav.navigate(NavDestinations.LogOut)
                     isAnimate.value = !isAnimate.value
                 }
@@ -226,12 +228,14 @@ fun ProfileScreeUI(
                 ShoppingButton(text = btnText, containerColor = Color(0xFFD9D9D9)) {
                     focusManager.clearFocus()
                     if(btnText=="Save"){
-                        vm.updateUserdata(UserData(
+                        vm.updateUserdata(
+                            UserData(
                             name = "${fName.value} ${lName.value}",
                             email = email.value,
                             address = address.value,
                             password = password.value
-                        ))
+                        )
+                        )
                     }
                     isEnable.value = !isEnable.value
                 }

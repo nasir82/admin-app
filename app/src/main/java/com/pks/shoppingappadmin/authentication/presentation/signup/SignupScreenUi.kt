@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,31 +37,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.pks.shoppingappadmin.R
 import com.pks.shoppingappadmin.authentication.presentation.AuthenticationViewModel
+import com.pks.shoppingappadmin.category.domain.model.UserData
 import com.pks.shoppingappadmin.category.presentation.AddCategoryViewModel
 import com.pks.shoppingappadmin.components.DividerWithText
 import com.pks.shoppingappadmin.components.LoginWithSocialMedia
 import com.pks.shoppingappadmin.components.ShoppingButton
 import com.pks.shoppingappadmin.components.ShoppingTextField
-import com.pks.shoppingappadmin.domain.model.UserData
-import com.pks.shoppingappadmin.presentation.navigation.App
-import com.pks.shoppingappadmin.presentation.navigation.Login
-import com.pks.shoppingappadmin.showcategory.presentation.CategoryViewModel
+import com.pks.shoppingappadmin.navigation.App
+import com.pks.shoppingappadmin.navigation.Login
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun SignUpScreenUI(
-    modifier: Modifier = Modifier,
     viewModel: AuthenticationViewModel,
     nav: NavController,
     auth: FirebaseAuth,
-    categoryViewModel: CategoryViewModel,
     addCategoryViewModel: AddCategoryViewModel
 ) {
     val x = LocalConfiguration.current.screenWidthDp - 150
@@ -70,6 +69,9 @@ fun SignUpScreenUI(
         mutableStateOf("")
     }
     val email = remember {
+        mutableStateOf("")
+    }
+    val address = remember {
         mutableStateOf("")
     }
     val password = remember {
@@ -88,25 +90,39 @@ fun SignUpScreenUI(
     val state = viewModel.signupScreenState.collectAsState()
     if (state.value.isLoading) {
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
+        ) {
             CircularProgressIndicator()
         }
     } else if (state.value.error != null) {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
+        ) {
             Text(text = state.value.error.toString())
         }
     } else if (state.value.userData != null) {
-       // SuccessScreen(navDestinations = nav)
-        App(firebaseAuth = auth, categoryViewModel = categoryViewModel, addCategoryViewModel = addCategoryViewModel)
+        // SuccessScreen(navDestinations = nav)
+        App(firebaseAuth = auth, addCategoryViewModel = addCategoryViewModel)
     } else {
 
         var icon = if (isShow.value) Icons.Default.VisibilityOff else Icons.Default.Visibility
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background)
+        ) {
             Box(
                 modifier = Modifier
 
                     .offset(x = (x).dp, y = (-200).dp)
-                    .background(color = Color(0xFFF68B8B), shape = CircleShape)
+                    .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
                     .size(size = 350.dp)
                     .clip(
                         shape = CircleShape
@@ -116,7 +132,7 @@ fun SignUpScreenUI(
                 modifier = Modifier
 
                     .offset(x = (-160).dp, y = (y).dp)
-                    .background(color = Color(0xFFF68B8B), shape = CircleShape)
+                    .background(color = MaterialTheme.colorScheme.primary, shape = CircleShape)
                     .size(size = 250.dp)
                     .clip(
                         shape = CircleShape
@@ -126,12 +142,18 @@ fun SignUpScreenUI(
             Column(
                 Modifier
                     .fillMaxSize()
+                    .background(color = Color.Transparent)
+                    .verticalScroll(rememberScrollState())
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
             ) {
 
-                Text(text = "Signup")
+                Text(
+                    text = "Signup",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -156,6 +178,9 @@ fun SignUpScreenUI(
                 ShoppingTextField(label = "Email", value = email.value) {
                     email.value = it
                 }
+                ShoppingTextField(label = "Address", value = address.value) {
+                    address.value = it
+                }
                 ShoppingTextField(
                     label = "password",
                     value = password.value,
@@ -178,9 +203,13 @@ fun SignUpScreenUI(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                ShoppingButton(text = "Signup", containerColor = Color(0xFFF68B8B)) {
-                    if (fName.value.isBlank() || email.value.isBlank() || password.value.isBlank() || confirmPassword.value.isBlank()) {
-                        Log.d("isBlack","Blank ase")
+                ShoppingButton(
+                    text = "Signup",
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onBackground
+                ) {
+                    if (fName.value.isBlank() || email.value.isBlank() || password.value.isBlank() || confirmPassword.value.isBlank() || address.value.isBlank()) {
+                        Log.d("isBlack", "Blank ase")
                         coroutineScope.launch {
                             snackbarHostState.showSnackbar(
                                 message = "This is a Snackbar for remind to fill",
@@ -193,6 +222,7 @@ fun SignUpScreenUI(
                         val user = UserData(
                             name = "${fName.value} ${lName.value}",
                             email = email.value,
+                            address = address.value,
                             password = password.value,
                             phone = "phone"
                         )
@@ -204,14 +234,19 @@ fun SignUpScreenUI(
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = "Already have an account?  ")
+                    Text(
+                        text = "Already have an account?  ",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                     Text(
                         text = "Login",
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier.clickable {
-                           // nav.navigate(NavDestinations.LoginScreen)
                             nav.navigate(Login)
                         })
                 }

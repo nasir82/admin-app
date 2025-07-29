@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.pks.shoppingappadmin.category.domain.repo.AddCategoryRepo
 import com.pks.shoppingappadmin.category.presentation.show_category.CategoryState
 import com.pks.shoppingappadmin.common.ResultState
-import com.pks.shoppingappadmin.domain.model.CategoryModel
+import com.pks.shoppingappadmin.category.domain.model.CategoryModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

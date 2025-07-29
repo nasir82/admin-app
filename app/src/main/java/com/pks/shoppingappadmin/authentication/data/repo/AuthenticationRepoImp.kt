@@ -6,8 +6,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.pks.shoppingappadmin.authentication.domain.repo.AuthenticationRepo
 import com.pks.shoppingappadmin.authentication.presentation.UpdateUserDataState
 import com.pks.shoppingappadmin.authentication.presentation.profile.ProfileScreenState
+import com.pks.shoppingappadmin.category.domain.model.UserData
 import com.pks.shoppingappadmin.common.ResultState
-import com.pks.shoppingappadmin.domain.model.UserData
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -95,9 +95,5 @@ class ShoppingAppRepoImp @Inject constructor(private val db:FirebaseFirestore, p
             close()
         }
     }
-
-//    fun saveUserData(data:UserData):Boolean{
-//
-//    }
 
 }

@@ -87,4 +87,5 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation(libs.bouquet)
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation ("com.airbnb.android:lottie-compose:6.5.2")
 }

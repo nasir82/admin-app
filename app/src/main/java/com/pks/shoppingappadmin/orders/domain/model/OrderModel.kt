@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 @Serializable
 data class OrderModel(
     val id: String?  = "",
-    val receipt: String? = "",
+    val receipt: String = "",
     val price: Int? = 0,
     var status: String? = "",
     val approximateDelivery: String? = "",
